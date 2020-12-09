@@ -21,9 +21,9 @@ class UpdateUserRequest extends FormRequest
                 'string',
                 'required',
             ],
-            'username'            => [
+            'full_name'           => [
                 'string',
-                'required',
+                'nullable',
             ],
             'email'               => [
                 'required',
@@ -41,21 +41,11 @@ class UpdateUserRequest extends FormRequest
                 'string',
                 'nullable',
             ],
-            'is_active'           => [
-                'required',
-            ],
             'roles.*'             => [
                 'integer',
             ],
             'roles'               => [
-                'required',
                 'array',
-            ],
-            'is_blocked'          => [
-                'required',
-            ],
-            'is_provider'         => [
-                'required',
             ],
             'phone_verified_at'   => [
                 'date_format:' . config('panel.date_format') . ' ' . config('panel.time_format'),

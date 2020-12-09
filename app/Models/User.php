@@ -27,7 +27,6 @@ class User extends Authenticatable implements HasMedia
 
     public static $searchable = [
         'name',
-        'username',
     ];
 
     protected $hidden = [
@@ -75,7 +74,7 @@ class User extends Authenticatable implements HasMedia
 
     protected $fillable = [
         'name',
-        'username',
+        'full_name',
         'email',
         'email_verified_at',
         'password',

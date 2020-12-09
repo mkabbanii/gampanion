@@ -24,14 +24,14 @@
                             <span class="help-block">{{ trans('cruds.user.fields.name_helper') }}</span>
                         </div>
                         <div class="form-group">
-                            <label class="required" for="username">{{ trans('cruds.user.fields.username') }}</label>
-                            <input class="form-control" type="text" name="username" id="username" value="{{ old('username', $user->username) }}" required>
-                            @if($errors->has('username'))
+                            <label for="full_name">{{ trans('cruds.user.fields.full_name') }}</label>
+                            <input class="form-control" type="text" name="full_name" id="full_name" value="{{ old('full_name', $user->full_name) }}">
+                            @if($errors->has('full_name'))
                                 <div class="invalid-feedback">
-                                    {{ $errors->first('username') }}
+                                    {{ $errors->first('full_name') }}
                                 </div>
                             @endif
-                            <span class="help-block">{{ trans('cruds.user.fields.username_helper') }}</span>
+                            <span class="help-block">{{ trans('cruds.user.fields.full_name_helper') }}</span>
                         </div>
                         <div class="form-group">
                             <label class="required" for="email">{{ trans('cruds.user.fields.email') }}</label>
@@ -121,10 +121,10 @@
                             <span class="help-block">{{ trans('cruds.user.fields.about_helper') }}</span>
                         </div>
                         <div class="form-group">
-                            <label class="required">{{ trans('cruds.user.fields.is_active') }}</label>
+                            <label>{{ trans('cruds.user.fields.is_active') }}</label>
                             @foreach(App\Models\User::IS_ACTIVE_RADIO as $key => $label)
                                 <div>
-                                    <input type="radio" id="is_active_{{ $key }}" name="is_active" value="{{ $key }}" {{ old('is_active', $user->is_active) === (string) $key ? 'checked' : '' }} required>
+                                    <input type="radio" id="is_active_{{ $key }}" name="is_active" value="{{ $key }}" {{ old('is_active', $user->is_active) === (string) $key ? 'checked' : '' }}>
                                     <label for="is_active_{{ $key }}">{{ $label }}</label>
                                 </div>
                             @endforeach
@@ -136,12 +136,12 @@
                             <span class="help-block">{{ trans('cruds.user.fields.is_active_helper') }}</span>
                         </div>
                         <div class="form-group">
-                            <label class="required" for="roles">{{ trans('cruds.user.fields.roles') }}</label>
+                            <label for="roles">{{ trans('cruds.user.fields.roles') }}</label>
                             <div style="padding-bottom: 4px">
                                 <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
                                 <span class="btn btn-info btn-xs deselect-all" style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
                             </div>
-                            <select class="form-control select2" name="roles[]" id="roles" multiple required>
+                            <select class="form-control select2" name="roles[]" id="roles" multiple>
                                 @foreach($roles as $id => $roles)
                                     <option value="{{ $id }}" {{ (in_array($id, old('roles', [])) || $user->roles->contains($id)) ? 'selected' : '' }}>{{ $roles }}</option>
                                 @endforeach
@@ -154,10 +154,10 @@
                             <span class="help-block">{{ trans('cruds.user.fields.roles_helper') }}</span>
                         </div>
                         <div class="form-group">
-                            <label class="required">{{ trans('cruds.user.fields.is_blocked') }}</label>
+                            <label>{{ trans('cruds.user.fields.is_blocked') }}</label>
                             @foreach(App\Models\User::IS_BLOCKED_RADIO as $key => $label)
                                 <div>
-                                    <input type="radio" id="is_blocked_{{ $key }}" name="is_blocked" value="{{ $key }}" {{ old('is_blocked', $user->is_blocked) === (string) $key ? 'checked' : '' }} required>
+                                    <input type="radio" id="is_blocked_{{ $key }}" name="is_blocked" value="{{ $key }}" {{ old('is_blocked', $user->is_blocked) === (string) $key ? 'checked' : '' }}>
                                     <label for="is_blocked_{{ $key }}">{{ $label }}</label>
                                 </div>
                             @endforeach
@@ -169,10 +169,10 @@
                             <span class="help-block">{{ trans('cruds.user.fields.is_blocked_helper') }}</span>
                         </div>
                         <div class="form-group">
-                            <label class="required">{{ trans('cruds.user.fields.is_provider') }}</label>
+                            <label>{{ trans('cruds.user.fields.is_provider') }}</label>
                             @foreach(App\Models\User::IS_PROVIDER_RADIO as $key => $label)
                                 <div>
-                                    <input type="radio" id="is_provider_{{ $key }}" name="is_provider" value="{{ $key }}" {{ old('is_provider', $user->is_provider) === (string) $key ? 'checked' : '' }} required>
+                                    <input type="radio" id="is_provider_{{ $key }}" name="is_provider" value="{{ $key }}" {{ old('is_provider', $user->is_provider) === (string) $key ? 'checked' : '' }}>
                                     <label for="is_provider_{{ $key }}">{{ $label }}</label>
                                 </div>
                             @endforeach

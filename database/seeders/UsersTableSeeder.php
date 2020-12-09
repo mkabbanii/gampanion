@@ -17,7 +17,7 @@ class UsersTableSeeder extends Seeder
                 'password'            => bcrypt('password'),
                 'remember_token'      => null,
                 'verified'            => 1,
-                'verified_at'         => '2020-12-08 22:40:42',
+                'verified_at'         => '2020-12-08 23:21:23',
                 'phone'               => '',
                 'about'               => '',
                 'address'             => '',
@@ -25,12 +25,12 @@ class UsersTableSeeder extends Seeder
                 'verification_token'  => '',
                 'language'            => '',
                 'rank'                => '',
-                'username'            => '',
                 'nationality'         => '',
                 'passport_number'     => '',
                 'bank_name'           => '',
                 'bank_account_number' => '',
                 'beneficial_name'     => '',
+                'full_name'           => '',
             ],
         ];
 

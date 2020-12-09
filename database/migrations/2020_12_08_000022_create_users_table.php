@@ -28,7 +28,6 @@ class CreateUsersTable extends Migration
             $table->string('verification_token')->nullable();
             $table->string('language')->nullable();
             $table->string('rank')->nullable();
-            $table->string('username')->nullable();
             $table->datetime('become_provider_at')->nullable();
             $table->date('birth_day')->nullable();
             $table->string('gender')->nullable();
@@ -37,6 +36,7 @@ class CreateUsersTable extends Migration
             $table->string('bank_name')->nullable();
             $table->string('bank_account_number')->nullable();
             $table->string('beneficial_name')->nullable();
+            $table->string('full_name')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

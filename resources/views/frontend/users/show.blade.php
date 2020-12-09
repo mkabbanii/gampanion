@@ -36,10 +36,10 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.user.fields.username') }}
+                                        {{ trans('cruds.user.fields.full_name') }}
                                     </th>
                                     <td>
-                                        {{ $user->username }}
+                                        {{ $user->full_name }}
                                     </td>
                                 </tr>
                                 <tr>

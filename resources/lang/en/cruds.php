@@ -45,8 +45,8 @@ return [
         'fields'         => [
             'id'                         => 'ID',
             'id_helper'                  => ' ',
-            'name'                       => 'Full Name',
-            'name_helper'                => 'As per ID / Password',
+            'name'                       => 'User Name',
+            'name_helper'                => 'User Name',
             'email'                      => 'Email',
             'email_helper'               => ' ',
             'email_verified_at'          => 'Email verified at',
@@ -95,8 +95,6 @@ return [
             'language_helper'            => ' ',
             'rank'                       => 'User Rank',
             'rank_helper'                => ' ',
-            'username'                   => 'Username',
-            'username_helper'            => 'User Name',
             'become_provider_at'         => 'Become Provider At',
             'become_provider_at_helper'  => 'Provider request approval date',
             'birth_day'                  => 'Birth Day',
@@ -115,6 +113,8 @@ return [
             'bank_account_number_helper' => 'Bank Account Number',
             'beneficial_name'            => 'Beneficial Name',
             'beneficial_name_helper'     => 'Account holder name must be the same as IC/ Passport.',
+            'full_name'                  => 'Full Name',
+            'full_name_helper'           => 'Full Name as per IC / Passport',
         ],
     ],
     'auditLog'         => [
