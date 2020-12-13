@@ -10,7 +10,9 @@
         <p class="login-box-msg">
             {{ trans('global.login') }}
         </p>
-
+        
+        GAMPANION
+        
         @if(session('message'))
             <p class="alert alert-info">
                 {{ session('message') }}
