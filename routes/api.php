@@ -24,5 +24,15 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\User'], f
     });
     Route::gamespanionAndPlus('gampanions', 'GampanionApiController');
 
+    /* API Order */
+    Route::macro('ordersAndPlus', function ($uri, $controller) {
+        Route::get("{$uri}/ordersUser1", "{$controller}@ordersUser1")->name("{$uri}.ordersUser1");
+        Route::get("{$uri}/ordersUser2", "{$controller}@ordersUser2")->name("{$uri}.ordersUser2");
+        Route::get("{$uri}/show1/{id}", "{$controller}@show1")->name("{$uri}.show1");
+        Route::get("{$uri}/show2/{id}", "{$controller}@show2")->name("{$uri}.show2");
+        //Route::resource($uri, $controller);
+    });
+    Route::ordersAndPlus('orders', 'OrdersApiController');
+
 
 });
