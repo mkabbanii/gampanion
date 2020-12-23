@@ -26,7 +26,7 @@ class OrdersApiController extends Controller
             else{
                 $connectedUserId = 1;
             }
-            return new OrderResource(Order::with(['gampanion'])->exclude(['amount_earned_by_provider'])->get());
+            return new OrderResource(Order::with(['gampanion'])->where('user_id',$connectedUserId)->exclude(['amount_earned_by_provider'])->get());
         /*}else{
              abort_if(Gate::denies('order_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         }*/
@@ -43,7 +43,7 @@ class OrdersApiController extends Controller
             else{
                 $connectedUserId = 1;
             }
-            return new OrderResource(Order::with(['gampanion'])->exclude(['amount_deducted_from_user'])->get());
+            return new OrderResource(Order::with(['gampanion'])->where('user_id',$connectedUserId)->exclude(['amount_deducted_from_user'])->get());
         /*}else{
              abort_if(Gate::denies('order_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         }*/
@@ -61,7 +61,7 @@ class OrdersApiController extends Controller
             else{
                 $connectedUserId = 1;
             }
-            return new OrderResource(Order::with(['gampanion'])->where('id',$id)->exclude(['amount_earned_by_provider'])->get());
+            return new OrderResource(Order::with(['gampanion'])->where('id',$id)->where('user_id',$connectedUserId)->exclude(['amount_earned_by_provider'])->get());
         /*}else{
              abort_if(Gate::denies('order_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         }*/
@@ -79,7 +79,7 @@ class OrdersApiController extends Controller
             else{
                 $connectedUserId = 1;
             }
-            return new OrderResource(Order::with(['gampanion'])->where('id',$id)->exclude(['amount_deducted_from_user'])->get());
+            return new OrderResource(Order::with(['gampanion'])->where('id',$id)->where('user_id',$connectedUserId)->exclude(['amount_deducted_from_user'])->get());
         /*}else{
              abort_if(Gate::denies('order_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         }*/
