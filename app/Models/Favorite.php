@@ -36,9 +36,19 @@ class Favorite extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+    public function user1()
+    {
+        return $this->belongsTo(User::class, 'user_id')
+        ->select(array('id','name'));
+    }
 
     public function favorite_user()
     {
         return $this->belongsTo(User::class, 'favorite_user_id');
+    }
+    public function favorite_user1()
+    {
+        return $this->belongsTo(User::class, 'favorite_user_id')
+        ->select(array('id','name'));
     }
 }

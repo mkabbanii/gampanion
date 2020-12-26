@@ -1,10 +1,21 @@
 <?php
 
+Route::group(['prefix' => 'v1', 'as' => 'api.'], function () {
+    Route::get('/', function(){
+        echo 'Welcome to User API';
+    });
+    Route::post('/login', 'Auth\ApiAuthController@login')->name('login.api');
+    Route::post('/register','Auth\ApiAuthController@register')->name('register.api');
+    Route::middleware('auth:api')->group(function () {
+        Route::post('/logout', 'Auth\ApiAuthController@logout')->name('logout.api');
+    });
+});
 Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\User'], function () {
     Route::get('/', function(){
         echo 'Welcome to User API';
     });
     
+
     /* API Game */
     Route::macro('gamesAndPlus', function ($uri, $controller) {
         // get all games + gampanion data
@@ -19,7 +30,6 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\User'], f
         // get all gampanions + game data with is_featured = 1 + user data
         Route::get("{$uri}/featuredGampanions", "{$controller}@featuredGampanions")->name("{$uri}.featuredGampanions");
         Route::post("{$uri}/add", "{$controller}@add")->name("{$uri}.add");
-
         Route::resource($uri, $controller);
     });
     Route::gamespanionAndPlus('gampanions', 'GampanionApiController');
@@ -34,5 +44,12 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\User'], f
     });
     Route::ordersAndPlus('orders', 'OrdersApiController');
 
-
+    /* API Favorite */
+    Route::macro('favoriteAndPlus', function ($uri, $controller) {
+        Route::get("{$uri}/index1", "{$controller}@index1")->name("{$uri}.index1");
+        Route::get("{$uri}/index2", "{$controller}@index2")->name("{$uri}.index2");
+        Route::get("{$uri}/index3", "{$controller}@index3")->name("{$uri}.index3");
+        //Route::resource($uri, $controller);
+    });
+    Route::favoriteAndPlus('favorites', 'FavoritesApiController');
 });

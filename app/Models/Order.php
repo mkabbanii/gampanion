@@ -41,7 +41,6 @@ class Order extends Model
         'updated_at',
         'deleted_at',
     ];
-    //protected $hidden = ['amount_earned_by_provider']; 
 
     protected $columns = array('id','amount_deducted_from_user','game_id', 'user_id','status_id','amount_earned_by_provider','note','gampanion_id','quantity','approved_at', 'rejected_at', 'proposed_time', 'request_note', 'created_at','updated_at', 'deleted_at');
     public function scopeExclude($query,$value = array()) 

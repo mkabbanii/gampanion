@@ -18,25 +18,54 @@ class GamesApiController extends Controller
 {
     use AuthenticatesUsers;
 
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
     public function index()
     {
-        // TODO Auth user
-        //abort_if(Gate::denies('game_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        return new GameResource(Game::all());
+        if (Auth::check())
+        {
+            if( isset(Auth::guard('api')->user()->id))
+            {
+                return new GameResource(Game::all());
+            }else{
+                abort_if(Gate::denies('game_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+            }
+        }else{
+            abort_if(Gate::denies('game_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        }        
     }
 
     public function AllAndGampanions()
     {
-        // TODO Auth user
-        //abort_if(Gate::denies('game_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        return new GameResource(Game::with('gameGampanions')->get());
+        if (Auth::check())
+        {
+            if( isset(Auth::guard('api')->user()->id))
+            {
+                return new GameResource(Game::with('gameGampanions')->get());
+            }
+            else{
+                abort_if(Gate::denies('game_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+            }
+        }else{
+            abort_if(Gate::denies('game_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        }
     }
     
     public function show(Game $game)
     {
-        return Game::with('gameGampanions')->where('id',$game->id)->get();
-        // TODO Auth user
-        //abort_if(Gate::denies('game_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        if (Auth::check())
+        {
+            if( isset(Auth::guard('api')->user()->id))
+            {
+                return Game::with('gameGampanions')->where('id',$game->id)->get();
+            }
+            else{
+                abort_if(Gate::denies('game_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+            }
+        }else{
+            abort_if(Gate::denies('game_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        }
     }
-
 }
