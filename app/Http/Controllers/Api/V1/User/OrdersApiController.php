@@ -63,7 +63,7 @@ class OrdersApiController extends Controller
                 return new OrderResource(Order::with(['gampanion'])->where('id',$id)->where('user_id',$connectedUserId)->exclude(['amount_earned_by_provider'])->get());
             }
             else{
-                return response()->json(['errors' => ['Permissions' => ['Current user is not a simple user']]], 401);
+                return response()->json(['errors' => 'Current user is not a simple user'], 401);
             }
         }else{
              abort_if(Gate::denies('order_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
@@ -80,7 +80,7 @@ class OrdersApiController extends Controller
                 return new OrderResource(Order::with(['gampanion'])->where('id',$id)->where('user_id',$connectedUserId)->exclude(['amount_deducted_from_user'])->get());
             }
             else{
-                return response()->json(['errors' => ['Permissions' => ['Current user is not a provider']]], 401);
+                return response()->json(['errors' => 'Current user is not a provider'], 401);
             }
         }else{
              abort_if(Gate::denies('order_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');

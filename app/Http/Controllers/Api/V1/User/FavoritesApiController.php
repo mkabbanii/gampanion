@@ -55,7 +55,6 @@ class FavoritesApiController extends Controller
         {
             if( isset(Auth::guard('api')->user()->id))
             {
-                abort_if(Gate::denies('favorite_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
                 $connectedUserId = Auth::guard('api')->user()->id;
                 return new FavoriteResource(Favorite::with(['user1', 'favorite_user'])->where('user_id',$connectedUserId)->get());
             }

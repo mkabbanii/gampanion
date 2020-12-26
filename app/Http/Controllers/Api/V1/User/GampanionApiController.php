@@ -76,7 +76,7 @@ class GampanionApiController extends Controller
                 return response()->json(['success' => 'success', "statusCode"=>Response::HTTP_CREATED]); 
             }
             else{
-                return response()->json(['errors' => ['Permissions' => ['Current user is not a provider']]], 401);
+                return response()->json(['errors' => 'Current user is not a provider'], 401);
             }
         }else{
             abort_if(Gate::denies('gampanion_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
