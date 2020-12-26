@@ -1,0 +1,187 @@
+{
+	"info": {
+		"_postman_id": "c78352a9-047c-4383-b101-691bd70030a2",
+		"name": "Tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "login",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "laravel_session",
+						"value": "eyJpdiI6IjE3SzhVcEFNdXk4NGdMOUZiZWIyN2c9PSIsInZhbHVlIjoiY1Yxdy96Uk8xMlJZTVhucmg2QytSRTAweXNyZTFCa0tIay9PM1c4c25yV092cWFuemN6RXhrVmVTZ0U1eEtndjhQNEp0WlNsQVNLRDdFWUtUa29FOWNqZys1djVQa1ZET1Jtb1VrcVZZTzlVWVJaZldGZ3BVQnl6NG5hdnlTVWUiLCJtYWMiOiI5ZTJiMWI1YzA5MDE5OWQzOWZiMGFlMzAxYThlNjZjNmYwMzljOTE0MjA1Njk1MjgzZmFjNjc5MTAwYWE3ZDUzIn0%3D",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "badouch1",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "email",
+							"value": "provider@user.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "password_confirmation",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/gampanion/public/api/v1/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"gampanion",
+						"public",
+						"api",
+						"v1",
+						"login"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "admin1@admin.com",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"disabled": true
+						},
+						{
+							"key": "name",
+							"value": "admin2",
+							"disabled": true
+						}
+					]
+				},
+				"description": "https://localhost/gampanion/public/api/v1/gampanions/featuredGampanions"
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJpdiI6InIyS0gxUFZGMEttazg5RHlRSFhRZUE9PSIsInZhbHVlIjoiSjR2b1Fpdk52bEkzR01GbEN2L0JQcDFRVkkvMEJYUm1HMnpFTkk3Kzh4YlZNMUVRR1FJZXVad1JlU3dvWi8rMmh4RmZ5VXNHRUdLeCt5UVhzajl3Q0JOK2gweFRhVGkvNTEyeXd3VndjZnhYd0luOG9lSDlHbTkzYnZQMzlHVSsiLCJtYWMiOiI1YzUyNDg4ZDc5NTg0M2MyODAzZWI1Mjg5ODA0OWNiNTVkNjMwZGZiZTViMmEyYTAwYjFkZmQyOWRlOTFmNzhjIn0=",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "X-Requested-With",
+						"value": "XMLHttpRequest",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/gampanion/public/api/v1/logout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"gampanion",
+						"public",
+						"api",
+						"v1",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "games",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://localhost/gampanion/public/login",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"gampanion",
+						"public",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MyFavorites v1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/gampanion/public/api/v1/games",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"gampanion",
+						"public",
+						"api",
+						"v1",
+						"games"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
