@@ -52,4 +52,11 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\User'], f
         //Route::resource($uri, $controller);
     });
     Route::favoriteAndPlus('favorites', 'FavoritesApiController');
+
+     /* API Wallet */
+     Route::macro('walletAndPlus', function ($uri, $controller) {
+        Route::get("{$uri}/", "{$controller}@show")->name("{$uri}.show");
+        //Route::resource($uri, $controller);
+    });
+    Route::walletAndPlus('wallets', 'WalletsApiController');
 });
