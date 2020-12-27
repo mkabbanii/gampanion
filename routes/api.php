@@ -59,4 +59,12 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\User'], f
         //Route::resource($uri, $controller);
     });
     Route::walletAndPlus('wallets', 'WalletsApiController');
+
+    /* API Withdraw */
+    Route::macro('withdrawAndPlus', function ($uri, $controller) {
+        Route::post("{$uri}/store", "{$controller}@store")->name("{$uri}.store");
+        Route::get("{$uri}/index", "{$controller}@index")->name("{$uri}.index");
+        //Route::resource($uri, $controller);
+    });
+    Route::withdrawAndPlus('withdraws', 'WithdrawsApiController');
 });

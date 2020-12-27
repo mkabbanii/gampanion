@@ -1,0 +1,119 @@
+{
+    "points": 200,
+    "cash_amount": 150,
+    "note": null,
+    "created_at": null,
+    "updated_at": null,
+    "deleted_at": null,
+    "user_id": 2,
+    "payment_method_id": 1,
+    "status_id": 1,
+    "payment_copy": null,
+    "user": {
+        "id": 2,
+        "name": "provider",
+        "email": "provider@user.com",
+        "email_verified_at": null,
+        "phone": null,
+        "about": null,
+        "is_active": null,
+        "is_blocked": null,
+        "is_provider": "Yes",
+        "phone_verified_at": null,
+        "address": null,
+        "gps_location": null,
+        "verified": 1,
+        "verified_at": "08-12-2020 23:50:17",
+        "verification_token": null,
+        "language": null,
+        "rank": null,
+        "become_provider_at": null,
+        "birth_day": null,
+        "gender": null,
+        "nationality": null,
+        "passport_number": null,
+        "bank_name": null,
+        "bank_account_number": null,
+        "beneficial_name": null,
+        "full_name": "User1 Provider",
+        "created_at": "2020-12-08 16:50:17",
+        "updated_at": "2020-12-09 11:05:17",
+        "deleted_at": null,
+        "profile_photos": [],
+        "photo": [
+            {
+                "id": 12,
+                "model_type": "App\\Models\\User",
+                "model_id": 2,
+                "uuid": "08e69b23-1ec0-465d-89db-18397779788a",
+                "collection_name": "photo",
+                "name": "5fd46e484418e_WhatsApp Image 2020-10-07 at 9.20.32 PM",
+                "file_name": "5fd46e484418e_WhatsApp-Image-2020-10-07-at-9.20.32-PM.jpeg",
+                "mime_type": "image/jpeg",
+                "disk": "public",
+                "conversions_disk": "public",
+                "size": 16832,
+                "manipulations": [],
+                "custom_properties": {
+                    "generated_conversions": {
+                        "thumb": true,
+                        "preview": true
+                    }
+                },
+                "responsive_images": [],
+                "order_column": 12,
+                "created_at": "2020-12-12T00:16:28.000000Z",
+                "updated_at": "2020-12-12T00:16:31.000000Z",
+                "url": "http://localhost/storage/12/5fd46e484418e_WhatsApp-Image-2020-10-07-at-9.20.32-PM.jpeg",
+                "thumbnail": "http://localhost/storage/12/conversions/5fd46e484418e_WhatsApp-Image-2020-10-07-at-9.20.32-PM-thumb.jpg",
+                "preview": "http://localhost/storage/12/conversions/5fd46e484418e_WhatsApp-Image-2020-10-07-at-9.20.32-PM-preview.jpg"
+            }
+        ],
+        "audio": null,
+        "passport_photos": [],
+        "media": [
+            {
+                "id": 12,
+                "model_type": "App\\Models\\User",
+                "model_id": 2,
+                "uuid": "08e69b23-1ec0-465d-89db-18397779788a",
+                "collection_name": "photo",
+                "name": "5fd46e484418e_WhatsApp Image 2020-10-07 at 9.20.32 PM",
+                "file_name": "5fd46e484418e_WhatsApp-Image-2020-10-07-at-9.20.32-PM.jpeg",
+                "mime_type": "image/jpeg",
+                "disk": "public",
+                "conversions_disk": "public",
+                "size": 16832,
+                "manipulations": [],
+                "custom_properties": {
+                    "generated_conversions": {
+                        "thumb": true,
+                        "preview": true
+                    }
+                },
+                "responsive_images": [],
+                "order_column": 12,
+                "created_at": "2020-12-12T00:16:28.000000Z",
+                "updated_at": "2020-12-12T00:16:31.000000Z",
+                "url": "http://localhost/storage/12/5fd46e484418e_WhatsApp-Image-2020-10-07-at-9.20.32-PM.jpeg",
+                "thumbnail": "http://localhost/storage/12/conversions/5fd46e484418e_WhatsApp-Image-2020-10-07-at-9.20.32-PM-thumb.jpg",
+                "preview": "http://localhost/storage/12/conversions/5fd46e484418e_WhatsApp-Image-2020-10-07-at-9.20.32-PM-preview.jpg"
+            }
+        ]
+    },
+    "payment_method": {
+        "id": 1,
+        "method": "Direct Bank Transfer",
+        "created_at": "2020-12-08 23:48:16",
+        "updated_at": "2020-12-08 23:48:16",
+        "deleted_at": null
+    },
+    "status": {
+        "id": 1,
+        "status": "In Progress",
+        "created_at": "2020-12-08 23:48:50",
+        "updated_at": "2020-12-08 23:48:50",
+        "deleted_at": null
+    },
+    "media": []
+}
