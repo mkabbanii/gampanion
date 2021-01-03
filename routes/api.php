@@ -67,4 +67,20 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\User'], f
         //Route::resource($uri, $controller);
     });
     Route::withdrawAndPlus('withdraws', 'WithdrawsApiController');
+
+
+    /* API User */
+    Route::macro('userAndPlus', function ($uri, $controller) {
+        Route::get("{$uri}/currentUser", "{$controller}@currentUser")->name("{$uri}.currentUser");
+        Route::post("{$uri}/update", "{$controller}@update")->name("{$uri}.update");
+        Route::delete("{$uri}/softDelete/{id}", "{$controller}@delete")->name("{$uri}.delete");
+        Route::get("{$uri}/userById/{id}", "{$controller}@show")->name("{$uri}.show");
+        Route::get("{$uri}/recentsUsersPhotos", "{$controller}@recentsUsersPhotos")->name("{$uri}.recentsUsersPhotos");
+        Route::get("{$uri}/userPhotosById/{id}", "{$controller}@userPhotosById")->name("{$uri}.userPhotosById");
+        Route::post("{$uri}/addProfilePhoto", "{$controller}@addProfilePhoto")->name("{$uri}.addProfilePhoto");
+        //Route::resource($uri, $controller);
+    });
+    Route::userAndPlus('users', 'UsersApiController');
+    
+
 });
