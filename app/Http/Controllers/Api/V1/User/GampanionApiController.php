@@ -18,18 +18,18 @@ class GampanionApiController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:api');
+      //  $this->middleware('auth:api');
     }
 
     public function index()
     {
         if (Auth::check())
         {
-            if( isset(Auth::guard('api')->user()->id))
+          //  if( isset(Auth::guard('api')->user()->id))
             {
                 return new GampanionResource(Gampanion::with(['game','user'])->get());
-            }
-            else{
+          //  }
+          //  else{
                 abort_if(Gate::denies('gampanion_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
             }
         }else{

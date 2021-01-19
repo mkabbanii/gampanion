@@ -15,9 +15,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\User'], f
         echo 'Welcome to User API';
     });
 
-    Route::get('/test', function(){
-        echo 'Test API';
-    });
+
     
 
     /* API Game */
