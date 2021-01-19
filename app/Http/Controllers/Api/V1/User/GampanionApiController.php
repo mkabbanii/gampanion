@@ -23,18 +23,18 @@ class GampanionApiController extends Controller
 
     public function index()
     {
-        if (Auth::check())
-        {
+    //    if (Auth::check())
+    //    {
           //  if( isset(Auth::guard('api')->user()->id))
-            {
+        //    {
                 return new GampanionResource(Gampanion::with(['game','user'])->get());
           //  }
           //  else{
-                abort_if(Gate::denies('gampanion_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-            }
-        }else{
-            abort_if(Gate::denies('gampanion_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        }
+           //     abort_if(Gate::denies('gampanion_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+     //       }
+     //   }else{
+       //     abort_if(Gate::denies('gampanion_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+     //   }
     }
 
     public function show(Gampanion $gampanion)
