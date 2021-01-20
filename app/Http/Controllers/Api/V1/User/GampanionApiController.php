@@ -18,43 +18,22 @@ class GampanionApiController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:api');
+       
     }
 
     public function index()
     {
-        if (Auth::check())
-        {
-            if( isset(Auth::guard('api')->user()->id))
-            {
-                return new GampanionResource(Gampanion::with(['game','user'])->get());
-            }
-            else{
-                abort_if(Gate::denies('gampanion_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-            }
-        }else{
-            abort_if(Gate::denies('gampanion_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        }
+        return new GampanionResource(Gampanion::with(['game','user'])->get());
     }
 
     public function show(Gampanion $gampanion)
     {
-        if (Auth::check())
-        {
-            if( isset(Auth::guard('api')->user()->id))
-            {
-                return new GampanionResource($gampanion->load(['game', 'user','gampanionReviews']));
-            }
-            else{
-                abort_if(Gate::denies('gampanion_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-            }
-        }else{
-            abort_if(Gate::denies('gampanion_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        }
+        return new GampanionResource($gampanion->load(['game', 'user','gampanionReviews']));
     }
 
     public function add(Request $request)
     {
+        $this->middleware('auth:api');
         if (Auth::check())
         {
             if( isset(Auth::guard('api')->user()->id) && (Auth::guard('api')->user()->is_provider!="Yes"))
@@ -84,19 +63,8 @@ class GampanionApiController extends Controller
     }
 
     public function featuredGampanions(){
-        if (Auth::check())
-        {
-            if( isset(Auth::guard('api')->user()->id))
-            {
-                    return new GampanionResource(Gampanion::with(['game','user'])->whereHas("game", function($q) {
+        return new GampanionResource(Gampanion::with(['game','user'])->whereHas("game", function($q) {
                         $q->where("is_featured","=",1);
                     })->get());
-            }
-            else{
-                abort_if(Gate::denies('gampanion_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-            }
-        }else{
-            abort_if(Gate::denies('gampanion_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        }
     }
 }
