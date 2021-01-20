@@ -2,17 +2,14 @@
 @section('content')
 <div class="login-box">
     <div class="login-logo">
-        <a href="{{ route('admin.home') }}">
-            {{ trans('panel.site_title') }}
-        </a>
+        <img class="img-responsive" src="{{ asset('img/logo.png') }}" />
+
     </div>
     <div class="login-box-body">
         <p class="login-box-msg">
-            {{ trans('global.login') }}
+            {{ trans('global.login')}}
         </p>
-        
-        GAMPANION
-        
+
         @if(session('message'))
             <p class="alert alert-info">
                 {{ session('message') }}
@@ -62,6 +59,8 @@
 
         <a href="{{ route('register') }}">{{ trans('global.register') }}</a>
     </div>
+    <div class="login-box-msg">v 1.0</div>
+
 </div>
 @endsection
 
