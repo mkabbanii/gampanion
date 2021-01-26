@@ -122,4 +122,22 @@ class GampanionController extends Controller
 
         return response()->json(['id' => $media->id, 'url' => $media->getUrl()], Response::HTTP_CREATED);
     }
+    public function membershipslist(){
+
+        $gampanions = Gampanion::with(['game', 'user', 'media'])->orderby('user_id')->get();
+        $users = User::get();
+        
+        return view('admin.gampanions.membershiplist', compact('gampanions','users'));
+    }
+    public function acceptmembership(Request $req){
+        
+        User::where('id',$req->input('_iduser'))->update(['is_provider'=>'Yes']);
+        Gampanion::where('user_id',$req->input('_iduser'))->delete();
+
+        return back();
+    }
+    public function declinemembership(Request $req){
+        Gampanion::where('user_id',$req->input('_iduser'))->delete();
+        return back();
+    }
 }

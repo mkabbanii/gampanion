@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'acceptMemberShip'               => 'Accept membership',
+    'deniedMemberShip'               => 'Denied membership',
     'actions'                              => 'Actions',
     'add'                                  => 'Add',
     'allRightsReserved'                    => 'All rights reserved.',

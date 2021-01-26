@@ -47,12 +47,23 @@
                             </li>
                         @endcan
                         @can('gampanion_access')
-                            <li class="{{ request()->is("admin/gampanions") || request()->is("admin/gampanions/*") ? "active" : "" }}">
+                            <li class="{{ request()->is("admin/gampanions")  ? "active" : "" }}">
                                 <a href="{{ route("admin.gampanions.index") }}">
                                     <i class="fa-fw fas fa-cogs">
 
                                     </i>
                                     <span>{{ trans('cruds.gampanion.title') }}</span>
+
+                                </a>
+                            </li>
+                        @endcan
+                        @can('gampanion_access')
+                            <li class="{{ request()->is("admin/gampanions/membershipslist") || request()->is("admin/gampanions/membershipslist/*") ? "active" : "" }}">
+                                <a href="{{ route("admin.gampanions.membershipslist") }}">
+                                    <i class="fa-fw fas fa-send">
+
+                                    </i>
+                                    <span>{{ trans('cruds.gampanion.membershiplist') }}</span>
 
                                 </a>
                             </li>

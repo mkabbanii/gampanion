@@ -476,6 +476,7 @@ return [
     'gampanion'        => [
         'title'          => 'Gampanion',
         'title_singular' => 'Gampanion',
+        'membershiplist' => 'Membership List ',
         'fields'         => [
             'id'                  => 'ID',
             'id_helper'           => ' ',

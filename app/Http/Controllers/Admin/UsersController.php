@@ -181,4 +181,6 @@ class UsersController extends Controller
 
         return response()->json(['id' => $media->id, 'url' => $media->getUrl()], Response::HTTP_CREATED);
     }
+
+  
 }

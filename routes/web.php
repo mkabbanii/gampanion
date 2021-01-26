@@ -87,6 +87,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('gampanions/destroy', 'GampanionController@massDestroy')->name('gampanions.massDestroy');
     Route::post('gampanions/media', 'GampanionController@storeMedia')->name('gampanions.storeMedia');
     Route::post('gampanions/ckmedia', 'GampanionController@storeCKEditorImages')->name('gampanions.storeCKEditorImages');
+    Route::get('gampanions/membershipslist', 'GampanionController@membershipslist')->name('gampanions.membershipslist');;
+    Route::post('gampanions/acceptmembership', 'GampanionController@acceptmembership')->name('gampanions.acceptmembership');
+    Route::post('gampanions/declinemembership', 'GampanionController@declinemembership')->name('gampanions.declinemembership');
     Route::resource('gampanions', 'GampanionController');
 
     // Banners
@@ -101,9 +104,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     Route::get('global-search', 'GlobalSearchController@search')->name('globalSearch');
     Route::get('user-alerts/read', 'UserAlertsController@read');
+
+   
+
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
-// Change password
     if (file_exists(app_path('Http/Controllers/Auth/ChangePasswordController.php'))) {
         Route::get('password', 'ChangePasswordController@edit')->name('password.edit');
         Route::post('password', 'ChangePasswordController@update')->name('password.update');
@@ -127,7 +132,7 @@ Route::group(['as' => 'frontend.', 'namespace' => 'Frontend', 'middleware' => ['
     Route::resource('users', 'UsersController');
 
     // Audit Logs
-    Route::resource('audit-logs', 'AuditLogsController', ['except' => ['create', 'store', 'edit', 'update', 'destroy']]);
+   // Route::resource('audit-logs', 'AuditLogsController', ['except' => ['create', 'store', 'edit', 'update', 'destroy']]);
 
     // User Alerts
     Route::delete('user-alerts/destroy', 'UserAlertsController@massDestroy')->name('user-alerts.massDestroy');

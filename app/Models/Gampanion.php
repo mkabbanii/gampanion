@@ -73,6 +73,7 @@ class Gampanion extends Model implements HasMedia
         return $this->belongsTo(User::class, 'user_id');
     }
 
+
     public function getPhotoAttribute()
     {
         $file = $this->getMedia('photo')->last();
