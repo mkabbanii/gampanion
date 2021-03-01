@@ -73,6 +73,7 @@ class User extends Authenticatable implements HasMedia
     ];
 
     protected $fillable = [
+        'id',
         'name',
         'full_name',
         'email',
@@ -133,6 +134,8 @@ class User extends Authenticatable implements HasMedia
                 }
 
                 $user->verification_token = $token;
+                echo ($user->idd);
+                //exit(0);
                 $user->save();
 
                 $registrationRole = config('panel.registration_default_role');
