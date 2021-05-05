@@ -1,0 +1,33 @@
+// SEND POST => http://localhost/gampanion/public/api/v1/gampanions/add
+{
+        "gampanion":{    
+            "cost": 5,
+            "level": "N/A",
+            "server": "N/A",
+            "platform": "Linux",
+            "availability": 1,
+            "discount": 0,
+            "other_game": null,
+            "created_at": "2020-12-09 12:13:05",
+            "updated_at": "2020-12-09 12:13:05",
+            "deleted_at": null,
+            "user_id": 2,
+            "photo": null,
+            "media": []
+        },
+        "games":[
+            {
+                "game_id":1,
+                "photo":null
+            },
+            {
+                "game_id":2,
+                "photo":null
+            }
+        ]   
+}
+// RETURN 
+{
+    "success": "success",
+    "statusCode": 201
+}
