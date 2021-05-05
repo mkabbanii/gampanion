@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1\uSER;
+namespace App\Http\Controllers\Api\V1\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Traits\MediaUploadingTrait;
