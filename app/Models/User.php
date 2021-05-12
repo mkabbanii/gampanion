@@ -239,6 +239,15 @@ class User extends Authenticatable implements HasMedia
         return $files;
     }
 
+    public function getPhoto()
+    {
+        $photo_urls = array();
+        $files = $this->getMedia('profile_photos');
+        $files->each(function ($item) {
+            $photo_urls[]  = $item->getUrl();
+        });
+        return $photo_urls;
+    }
     public function getPhotoAttribute()
     {
         $files = $this->getMedia('photo');
@@ -250,7 +259,6 @@ class User extends Authenticatable implements HasMedia
 
         return $files;
     }
-
     public function roles()
     {
         return $this->belongsToMany(Role::class);

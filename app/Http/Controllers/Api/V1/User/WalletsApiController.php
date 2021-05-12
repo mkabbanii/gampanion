@@ -24,15 +24,17 @@ class WalletsApiController extends Controller
             if(isset(Auth::guard('api')->user()->id))
             {
                 $connectedUserId = Auth::guard('api')->user()->id;
-                return new WalletResource(Wallet::with(['user'])->where('user_id',$connectedUserId)->get());
+                $wallet = Wallet::where('user_id',$connectedUserId)->first();
+
+                return new WalletResource($wallet->only(['balance','last_added_amount','previous_balance','last_deduct_amount']));
             }
             else {
                 abort_if(Gate::denies('wallet_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
             }
         }else{
             abort_if(Gate::denies('wallet_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        } 
+        }
     }
 
-    
+
 }

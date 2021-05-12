@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1\uSER;
+namespace App\Http\Controllers\Api\V1\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Traits\MediaUploadingTrait;
@@ -10,6 +10,8 @@ use App\Http\Resources\Admin\GampanionResource;
 use App\Models\Gampanion;
 use Gate;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class GampanionApiController extends Controller
@@ -18,7 +20,7 @@ class GampanionApiController extends Controller
 
     public function __construct()
     {
-       
+
     }
 
     public function index()
@@ -52,7 +54,7 @@ class GampanionApiController extends Controller
                     $gampanion->photo=$games[$i]['photo'];
                     new GampanionResource($gampanion);
                 }
-                return response()->json(['success' => 'success', "statusCode"=>Response::HTTP_CREATED]); 
+                return response()->json(['success' => 'success', "statusCode"=>Response::HTTP_CREATED]);
             }
             else{
                 return response()->json(['errors' => 'Current user is not a simple user'], 401);
@@ -60,6 +62,28 @@ class GampanionApiController extends Controller
         }else{
             abort_if(Gate::denies('gampanion_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         }
+    }
+
+    public function delete($id){
+        $this->middleware('auth:api');
+
+        if (true)
+        {
+            var_dump("22");
+            if( isset(Auth::guard('api')->user()->id) && (Auth::guard('api')->user()->is_provider!="Yes"))
+            {
+
+                $Gampanion = Gampanion::find($id);
+                $Gampanion->delete();
+                return response(null, Response::HTTP_NO_CONTENT);
+            }
+            else{
+                return response()->json(['errors' => 'Current user is not a simple user'], 401);
+            }
+        }else{
+            abort_if(Gate::denies('gampanion_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        }
+
     }
 
     public function featuredGampanions(){

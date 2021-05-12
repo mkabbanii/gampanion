@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use \DateTimeInterface;
+use Symfony\Component\HttpFoundation\Response;
 
 class Favorite extends Model
 {
@@ -27,10 +28,12 @@ class Favorite extends Model
         'deleted_at',
     ];
 
+
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');
     }
+
 
     public function user()
     {
@@ -51,4 +54,6 @@ class Favorite extends Model
         return $this->belongsTo(User::class, 'favorite_user_id')
         ->select(array('id','name'));
     }
+
+
 }

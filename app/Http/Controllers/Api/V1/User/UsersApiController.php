@@ -152,6 +152,22 @@ class UsersApiController extends Controller
         }
     }
 
+    public function selectUserEmail (string $email)
+    {
+        if (Auth::check())
+        {
+            if( isset(Auth::guard('api')->user()->email) )
+            {
+                return new UserResource(User::with(['userGampanions'])->where('email',$email)->get());
+            }
+            else{
+                abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+            }
+        }else{
+                 abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        }
+    }
+
     public function recentsUsersPhotos(){
         if (Auth::check())
         {
@@ -186,7 +202,7 @@ class UsersApiController extends Controller
             abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         }
     }
-   
+
     public function addProfilePhoto(Request $request)
     {
         if (Auth::check())
@@ -194,7 +210,7 @@ class UsersApiController extends Controller
             if( isset(Auth::guard('api')->user()->id) && (Auth::guard('api')->user()->is_provider=="Yes"))
             {
                 $user=User::where('id',Auth::guard('api')->user()->id)->get();
-                
+
                 if ($request->input('profile_photos', false)) {
                     if (!$user->profile_photos || $request->input('profile_photos') !== $user->profile_photos->file_name) {
                         $user->addMedia(storage_path('tmp/uploads/' . $request->input('profile_photos')))->toMediaCollection('profile_photos');

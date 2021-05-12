@@ -50,7 +50,7 @@ class OrdersApiController extends Controller
         }else{
             abort_if(Gate::denies('order_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         }
-        
+
     }
 
     public function show1($id)
@@ -69,7 +69,6 @@ class OrdersApiController extends Controller
              abort_if(Gate::denies('order_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         }
     }
-
     public function show2($id)
     {
         if (Auth::check())

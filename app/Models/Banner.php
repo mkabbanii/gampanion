@@ -43,6 +43,16 @@ class Banner extends Model implements HasMedia
         $this->addMediaConversion('preview')->fit('crop', 120, 120);
     }
 
+    public function getUrl(){
+        $files = $this->getMedia('banners');
+        $files->each(function ($item) {
+            $item->url       = $item->getUrl();
+            $item->thumbnail = $item->getUrl('thumb');
+            $item->preview   = $item->getUrl('preview');
+        });
+        return $files->only(['url']);
+    }
+
     public function getBannersAttribute()
     {
         $files = $this->getMedia('banners');
