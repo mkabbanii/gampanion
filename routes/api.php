@@ -81,6 +81,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\User'], f
     /* API User */
     Route::macro('userAndPlus', function ($uri, $controller) {
         Route::get("{$uri}/currentUser", "{$controller}@currentUser")->name("{$uri}.currentUser");
+        Route::get("{$uri}/is-provider", "{$controller}@isProvider")->name("{$uri}.is-provider");
         Route::post("{$uri}/update", "{$controller}@update")->name("{$uri}.update");
         Route::delete("{$uri}/softDelete/{id}", "{$controller}@delete")->name("{$uri}.delete");
         Route::get("{$uri}/userById/{email}", "{$controller}@show")->name("{$uri}.show");
