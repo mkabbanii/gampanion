@@ -300,4 +300,9 @@ class User extends Authenticatable implements HasMedia
 
         return $files;
     }
+    public function isProvider()
+    {
+        $bool = (bool)($this->is_provider=="Yes"?1:0);
+        return $bool ;
+    }
 }

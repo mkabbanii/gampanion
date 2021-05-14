@@ -86,7 +86,7 @@ class FavoritesApiController extends Controller
                     $fav_user = User::where('id',$user->favorite_user_id)->select(['rank', 'name'])->first();
                     $url=$fav_user->getPhoto();
                     $fav_user->photo_url = $url;
-                    $user->favorite_user = $fav_user->only(['name','rank','photo_url']);
+                    $user->favorite_user = $fav_user->only(['name','rank','about','photo_url']);
                 }
                 return new FavoriteResource($fav);
             } else {

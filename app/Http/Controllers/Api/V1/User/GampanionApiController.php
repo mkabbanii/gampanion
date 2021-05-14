@@ -9,7 +9,9 @@ use App\Http\Requests\UpdateGampanionRequest;
 use App\Http\Resources\Admin\GampanionResource;
 use App\Models\Favorite;
 use App\Models\Gampanion;
+use App\Models\GampanionRequests;
 use Gate;
+use http\Client\Curl\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
@@ -32,7 +34,7 @@ class GampanionApiController extends Controller
             $favs = Favorite::select('favorite_user_id')->where('user_id', $connectedUserId)->get();
             $favs_ids = array();
             foreach ($favs as $fav) {
-                $favs_ids[]=$fav->favorite_user_id;
+                $favs_ids[] = $fav->favorite_user_id;
             }
             if (in_array($gampanion->user_id, $favs_ids))
                 $gampanion->fav = true;
@@ -74,6 +76,56 @@ class GampanionApiController extends Controller
         }
     }
 
+    public function Request()
+    {
+        if (Auth::guard('api')->user()->id) {
+            var_dump(Auth::guard('api')->user()->getIsAdminAttribute());
+            $connected_userid = Auth::guard('api')->user()->id;
+            $is_provider=Auth::guard('api')->user()->isProvider();
+            if ((isset(Auth::guard('api')->user()->id) && (Auth::guard('api')->user()->is_provider != "Yes")) && !$is_provider) {
+                $requestDb = GampanionRequests::where('user_id',$connected_userid)->first();
+                if(!$requestDb) {
+
+                    $newRequest = new GampanionRequests();
+                    $newRequest->user_id = $connected_userid;
+                    $newRequest->save();
+                    return Response()->json(['message'=>'Request Sent']);
+                }else{
+                    if($requestDb->status == 1) return Response()->json(['message'=>'Request is pending please wait']);
+                    if($requestDb->status == 2) return Response()->json(['message'=>'You are already a Gampanion']);
+                }
+            } else {
+                return response()->json(['errors' => 'Current user is not a simple user'], 401);
+            }
+        } else {
+            abort_if(Gate::denies('gampanion_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        }
+    }
+    public function SendRequest()
+    {
+        if (Auth::guard('api')->user()->id) {
+            $connected_userid = Auth::guard('api')->user()->id;
+            $is_provider=Auth::guard('api')->user()->isProvider();
+            if ((isset(Auth::guard('api')->user()->id) && (Auth::guard('api')->user()->is_provider != "Yes")) && !$is_provider) {
+                $requestDb = GampanionRequests::where('user_id',$connected_userid)->first();
+                if(!$requestDb) {
+
+                    $newRequest = new GampanionRequests();
+                    $newRequest->user_id = $connected_userid;
+                    $newRequest->save();
+                    return Response()->json(['message'=>'Request Sent']);
+                }else{
+                    if($requestDb->status == 1) return Response()->json(['message'=>'Request is pending please wait']);
+                    if($requestDb->status == 2) return Response()->json(['message'=>'You are already a Gampanion']);
+                }
+            } else {
+                return response()->json(['errors' => 'Current user is not a simple user'], 401);
+            }
+        } else {
+            abort_if(Gate::denies('gampanion_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        }
+    }
+
     public function addGame(Request $request)
     {
         $this->middleware('auth:api');
@@ -90,7 +142,7 @@ class GampanionApiController extends Controller
                 $gampanion->user_id = $connectedUserId;
                 $gampanion = Gampanion::create($gampanion1);
                 if ($game['photo'] != null) {
-                    $gampanion->addMedia(storage_path('tmp/uploads/' . $game[$i]['photo']))->toMediaCollection('photo');
+                    $gampanion->addMedia(storage_path('tmp/uploads/' . $game['photo']))->toMediaCollection('photo');
                 }
                 $gampanion->photo = $game['photo'];
                 new GampanionResource($gampanion);
@@ -121,7 +173,6 @@ class GampanionApiController extends Controller
         } else {
             abort_if(Gate::denies('gampanion_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         }
-
     }
 
     public function featuredGampanions()

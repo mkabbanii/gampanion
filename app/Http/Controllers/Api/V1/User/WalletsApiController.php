@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreWalletRequest;
 use App\Http\Requests\UpdateWalletRequest;
 use App\Http\Resources\Admin\WalletResource;
+use App\Models\User;
 use App\Models\Wallet;
 use Gate;
 use Illuminate\Http\Request;
@@ -26,7 +27,12 @@ class WalletsApiController extends Controller
                 $connectedUserId = Auth::guard('api')->user()->id;
                 $wallet = Wallet::where('user_id',$connectedUserId)->first();
 
-                return new WalletResource($wallet->only(['balance','last_added_amount','previous_balance','last_deduct_amount']));
+                $user = User::find($connectedUserId);
+                $url=$user->getPhoto();
+                $user->photo_url = $url;
+
+                $wallet->user = $user->only(['name','created_at','photo_url']);
+                return new WalletResource($wallet->only(['user','balance','last_added_amount','previous_balance','last_deduct_amount']));
             }
             else {
                 abort_if(Gate::denies('wallet_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
