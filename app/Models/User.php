@@ -184,6 +184,10 @@ class User extends Authenticatable implements HasMedia
     {
         return $this->belongsToMany(UserAlert::class);
     }
+    public function UserAlerts()
+    {
+        return $this->hasMany(UserAlert::class ,'user_id','id');
+    }
 
     public function getEmailVerifiedAtAttribute($value)
     {
