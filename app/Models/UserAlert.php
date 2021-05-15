@@ -20,6 +20,7 @@ class UserAlert extends Model
     protected $fillable = [
         'alert_text',
         'alert_link',
+        'user_id',
         'created_at',
         'updated_at',
     ];
@@ -29,8 +30,4 @@ class UserAlert extends Model
         return $date->format('Y-m-d H:i:s');
     }
 
-    public function users()
-    {
-        return $this->belongsToMany(User::class);
-    }
 }

@@ -8,6 +8,7 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\Admin\UserResource;
 use App\Models\User;
+use App\Models\UserAlert;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -227,6 +228,19 @@ class UsersApiController extends Controller
                 return (new UserResource($user))->response()->setStatusCode(Response::HTTP_ACCEPTED);
             } else {
                 return response()->json(['errors' => 'Current user is not a provider'], 401);
+            }
+        } else {
+            abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        }
+    }
+
+    public function alerts()
+    {
+        if (Auth::check()) {
+            if (isset(Auth::guard('api')->user()->id)) {
+                $user = User::where('id', Auth::guard('api')->user()->id)->first();
+                $alerts = UserAlert::where('user_id',$user->id)->get();
+                return (new UserResource($alerts));
             }
         } else {
             abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
