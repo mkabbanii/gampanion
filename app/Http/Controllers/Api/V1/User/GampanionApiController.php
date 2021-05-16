@@ -182,9 +182,13 @@ class GampanionApiController extends Controller
                 $requestDb = GampanionRequests::where('user_id',$connected_userid)->first();
                 if(!$requestDb) {
 
-                    $newRequest = new GampanionRequests();
-                    $newRequest->user_id = $connected_userid;
-                    $newRequest->save();
+//                    $newRequest = new GampanionRequests();
+//                    $newRequest->user_id = $connected_userid;
+//                    $newRequest->save();
+                    GampanionRequests::create([
+                        'user_id'=>$connected_userid,
+                        'status' => 0
+                    ]);
                     return Response()->json(['message'=>'Request Sent']);
                 }else{
                     if($requestDb->status == 0) return Response()->json(['message'=>'Request is pending please wait']);

@@ -35,23 +35,23 @@ class User extends Authenticatable implements HasMedia
     ];
 
     const IS_BLOCKED_RADIO = [
-        'No'  => '0',
+        'No' => '0',
         'Yes' => '1',
     ];
 
     const IS_PROVIDER_RADIO = [
-        'No'  => '0',
+        'No' => '0',
         'Yes' => '1',
     ];
 
     const GENDER_RADIO = [
-        'male'   => 'Male',
+        'male' => 'Male',
         'female' => 'Female',
     ];
 
     const IS_ACTIVE_RADIO = [
         'Not Active' => '0',
-        'Active'     => '1',
+        'Active' => '1',
     ];
 
     protected $appends = [
@@ -121,20 +121,20 @@ class User extends Authenticatable implements HasMedia
         parent::__construct($attributes);
         self::created(function (User $user) {
             if (auth()->check()) {
-                $user->verified    = 1;
+                $user->verified = 1;
                 $user->verified_at = Carbon::now()->format(config('panel.date_format') . ' ' . config('panel.time_format'));
                 $user->save();
             } elseif (!$user->verification_token) {
-                $token     = Str::random(64);
+                $token = Str::random(64);
                 $usedToken = User::where('verification_token', $token)->first();
 
                 while ($usedToken) {
-                    $token     = Str::random(64);
+                    $token = Str::random(64);
                     $usedToken = User::where('verification_token', $token)->first();
                 }
 
                 $user->verification_token = $token;
-                echo ($user->idd);
+                echo($user->idd);
                 //exit(0);
                 $user->save();
 
@@ -184,9 +184,10 @@ class User extends Authenticatable implements HasMedia
     {
         return $this->belongsToMany(UserAlert::class);
     }
+
     public function UserAlerts()
     {
-        return $this->hasMany(UserAlert::class ,'user_id','id');
+        return $this->hasMany(UserAlert::class, 'user_id', 'id');
     }
 
     public function getEmailVerifiedAtAttribute($value)
@@ -235,9 +236,9 @@ class User extends Authenticatable implements HasMedia
     {
         $files = $this->getMedia('profile_photos');
         $files->each(function ($item) {
-            $item->url       = $item->getUrl();
+            $item->url = $item->getUrl();
             $item->thumbnail = $item->getUrl('thumb');
-            $item->preview   = $item->getUrl('preview');
+            $item->preview = $item->getUrl('preview');
         });
 
         return $files;
@@ -246,23 +247,25 @@ class User extends Authenticatable implements HasMedia
     public function getPhoto()
     {
         $photo_urls = array();
-        $files = $this->getMedia('profile_photos');
-        $files->each(function ($item) {
-            $photo_urls[]  = $item->getUrl();
-        });
+        $files = $this->getMedia('photo');
+        foreach ($files as $file) {
+            $photo_urls[] = $file->getUrl();
+        }
         return $photo_urls;
     }
+
     public function getPhotoAttribute()
     {
         $files = $this->getMedia('photo');
         $files->each(function ($item) {
-            $item->url       = $item->getUrl();
+            $item->url = $item->getUrl();
             $item->thumbnail = $item->getUrl('thumb');
-            $item->preview   = $item->getUrl('preview');
+            $item->preview = $item->getUrl('preview');
         });
 
         return $files;
     }
+
     public function roles()
     {
         return $this->belongsToMany(Role::class);
@@ -297,16 +300,17 @@ class User extends Authenticatable implements HasMedia
     {
         $files = $this->getMedia('passport_photos');
         $files->each(function ($item) {
-            $item->url       = $item->getUrl();
+            $item->url = $item->getUrl();
             $item->thumbnail = $item->getUrl('thumb');
-            $item->preview   = $item->getUrl('preview');
+            $item->preview = $item->getUrl('preview');
         });
 
         return $files;
     }
+
     public function isProvider()
     {
-        $bool = (bool)($this->is_provider=="Yes"?1:0);
-        return $bool ;
+        $bool = (bool)($this->is_provider == "Yes" ? 1 : 0);
+        return $bool;
     }
 }
