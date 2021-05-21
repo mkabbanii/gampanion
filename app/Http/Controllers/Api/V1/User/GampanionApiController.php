@@ -8,6 +8,7 @@ use App\Http\Requests\StoreGampanionRequest;
 use App\Http\Requests\UpdateGampanionRequest;
 use App\Http\Resources\Admin\GampanionResource;
 use App\Models\Favorite;
+use App\Models\Game;
 use App\Models\Gampanion;
 use App\Models\GampanionRequests;
 use App\Models\UserAlert;
@@ -57,6 +58,10 @@ class GampanionApiController extends Controller
             if (in_array($user->id, $favs_ids))
                 $user->fav = true;
             else $user->fav = false;
+
+            //retrieving gampanion games
+            $games_ids = Gampanion::select('game_id')->where('user_id',$user->id)->get();
+            $user->games = Game::whereIn('id',$games_ids)->get();
         }
         return new GampanionResource($users);
     }
