@@ -1,6 +1,6 @@
 <?php
 
-Route::view('/', 'welcome');
+// Route::view('/', 'welcome');
 Route::get('userVerification/{token}', 'UserVerificationController@approve')->name('userVerification');
 Auth::routes();
 
@@ -207,3 +207,7 @@ Route::group(['as' => 'frontend.', 'namespace' => 'Frontend', 'middleware' => ['
     Route::post('frontend/profile/destroy', 'ProfileController@destroy')->name('profile.destroy');
     Route::post('frontend/profile/password', 'ProfileController@password')->name('profile.password');
 });
+
+Route::get('/{any}', function () {
+    return view('vue');
+})->where('any', '^(?!api).*$');
